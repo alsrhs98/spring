@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<!-- css, js는 head안에 넣는다. -->
+<link rel="stylesheet" type="text/css" href="css/out.css"/> 
+<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$('.btn').click(function() {
+			idValue = $('.id').val() //root
+			console.log('입력한 id는 >> ' + idValue)
+		
+			if(idValue.length >= 5){
+				location.href = 'server.jsp?id=' + idValue
+			}else{
+				alert('5글자보다 크게 입력하세요.!!!')
+			}
+		})		
+	});
+	
+	
+	
+
+</script>
+</head>
+<body>
+환영합니다. 3일차입니다.<br>
+아이디 <input class="id" type="text" name="id"><br>
+<!-- 패스워드 <input type="text"><br> -->
+<input class="btn" type="button" value="입력값 체크">
+
+
+
+
+
+
+</body>
+</html>

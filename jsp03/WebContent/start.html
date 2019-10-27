@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<!-- css, js는 head안에 넣는다. -->
+<link rel="stylesheet" type="text/css" href="css/out.css"/> 
+<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+<script type="text/javascript">
+	//1. body부분부터 인식을 먼저 하라고 설정.
+	$(function() {
+		alert("환영합니다. 제이쿼리에 들어왔어요.!!")
+		
+		//2. 입력한 값 가지고 와서
+		idValue = $('input').val() //root
+		alert('입력한 id는 >> ' + idValue)
+	
+		//3. 입력한 값이 5보다 큰지 체크
+		if(idValue.length >= 5){
+			//서버로 입력한 정보를 넘김.
+			location.href = 'server.jsp?id=' + idValue
+		}else{
+			alert('5글자보다 크게 입력하세요.!!!')
+		}
+	});
+	
+	
+	
+
+</script>
+</head>
+<body>
+환영합니다. 3일차입니다.<br>
+아이디 <input type="text"  name="id" value="rooooooooooot"><br>
+<!-- 패스워드 <input type="text"><br> -->
+<input type="button" value="입력값 체크">
+
+
+
+
+
+
+</body>
+</html>

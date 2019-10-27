@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$('.btn').click(function() {
+			$('div').append('<img src=033.png>')
+		});
+		
+		$('.btn2').click(function() {
+			$('div').append('글자 추가됨! ')
+		});
+		
+	});
+	</script>
+</head>
+<body>
+<input type="button" value="이미지추가" class="btn">
+<input type="button" value="텍스트추가" class="btn2">
+<div></div>
+</body>
+</html>

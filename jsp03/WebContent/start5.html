@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$('.btn').click(function() {
+			reValue = $('.reply').val();
+			$.ajax({
+				url: "server3.jsp",
+				data: {
+					reply : reValue
+				},
+				success:function(result){
+					$('div').append('<img src=car.png width=50 height=50>');
+					$('div').append(result);
+				}
+			});
+		});
+	});
+</script>
+</head>
+<body>
+<img src=car.png width="200" height="200"><br>
+<hr color=red>
+<!--느낌을 댓글로 입력하는 곳. -->
+<input type="text" class="reply"> 
+<input type="button" class="btn" value="댓글달기"><br>
+<!--느낌이 추가되는 곳.  -->
+	<div></div>
+</body>
+</html>
+
+
+
