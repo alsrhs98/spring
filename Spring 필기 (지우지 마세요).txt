@@ -1,0 +1,188 @@
+MVC-1
+-Model: 특정한 처리(DAO, jsp)
+-View: 브라우저에 보여지는 부분(html, jsp)
+-Control: 클라이언트와 서버간 제어(jsp)
+
+MVC-2
+-Model: 특정한 처리(DAO, DTO, class)
+-View: 브라우저에 보여지는 부분(jsp)
+-Control: 클라이언트와 서버간 제어(control class)
+  - 브라우저로부터의 입력을 받아주고
+     적절히 처리할 수 있는 클래스로 처리
+     처리결과를 클라이언트에게 보내주는 역할
+===========================================
+DML(Data Manipulation Language)
+db로 데이터 처리(DML) 할 수 있는 항목들 == CRUD 크루드
+- insert(Create)
+- select(Read)
+- update(Update)
+- delete(Delete)
+============================================
+select(read)
+데이터를 묶어서 전송할 별도의 클래스 필요하다.
+  - 전송용 전담 클래스를 만든다.
+  - 데이터의 값을 넣거나, 빼기만 할 예정.
+  - Value Object(VO), Data Transfer Object(DTO) 라고 한다.
+
+===========================================
+페이지를 넘기지 않고,
+원하는 곳마다 서버와 통신하는 자바 스크립트 기술
+Ajax(에이작스)
+	- 요청할 주소 : url, 
+	- 내가 입력한 데이터 : data
+	- 통신한 결과를 받아와서 처리
+
+메타데이터를 붙여서 원데이터를 표현하는 방법
+------------------------------------------
+1. eXtensible Markup Language(XML)
+    태그를 확장해서 쓸 수 있는 문법
+ex)<name>홍길동</name>
+
+2. JSON - map 형태
+ex){'name':'홍길동'}
+
+===================================
+rdb(relational database)
+- 저장한 대상들의 관계를 고려해서
+ 테이블 형태로 저장하는 방식
+
+rdbms(rdb management system)
+-rdb 방식으로 데이터를 처리하기 위한 프로그램
+-mySQL, mariaDB, oracle, sqlite
+
+=============
+<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.46</version>
+		</dependency>
+		
+		<!-- 2.DBCP -->
+        <!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>1.4</version>
+        </dependency>
+
+
+
+        <!-- 3.myBatis -->
+        <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.3.1</version>
+        </dependency>
+
+        <!-- 4.spring+myBatis -->
+        <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>1.2.4</version>
+        </dependency>
+
+
+==============================================================
+1. 웹 프로그램 구조 그림
+
+ 클라이언트측 -------웹서버측-----------db측
+
+2. 웹 프로그램 각 측면을 설명
+
+ 클라이언트측 - 웹서비스를 이용하는 고객, 브라우저 
+ 웹서버측 - 웹서비스를 제공하는 서버, 웹서버+ WAS
+	  웹서버란? 클라이언트의 요청을 받아서 적절히 응답 
+		 ->단순한 요청은(html)은 찾아서 응답, 
+		 ->복잡한 요청(java,php,python,c#)은 웹서버가 불가능
+		     Web Application Server(WAS)
+ DB측 - 데이터를 가지고 있는 부분
+
+3. 각 측면에서 필요한 기술
+
+ 클라이언트측 - html, css, js(jquery, ajax), 외부 API
+ 웹서버측 - 자바, spring, jdbc(myBatis, jpa)
+ DB측 - sql 
+
+
+4. 필요한 기술 구현 여부
+==================================================
+mapper파일의 역할
+----------------------
+- 한 테이블당 필요한 sql문 작성
+- ResultMap태그를 이용
+   => db table에서 추출한 정보를
+       어떤 dto의 변수에 맵핑시킬지 정의
+       Java-----Rdb간 mapping
+      (Object     Rdb    Mapping: ORM )
+- db 테이블내의 한 행(레코드)은 java의 dto로 mapping
+- 하나의 레코드는 하나의 dto로 mapping
+- 여러개의 레코드는 dto가 여러개가 들어가 있는 list로 만들어짐.
+=====================================================
+myBatis를 사용하려면,
+-----------------------
+1. 필요한 라이브버리 pom.xml에 정의
+2. myBatis 싱글톤 객체 생성 정의(context파일)
+3. db관련 설정을 해주어야 한다.
+4. 한 테이블 당 하나의 mapper파일을 만들어준다.
+   테이블이 5개라면 mapper파일도 5개
+5. mapper파일의 리스트를 관리해주는 전체 myBatis설정 파일 필요
+    config파일
+6. DTO, DAO 필요
+7. 프로젝트의 모든 코드는 파일 하나당 하나의 기능만 담당!
+  (응집도가 높게!!!)
+8. 프로젝트의 모든 코드는 결합도를 낮추어야 한다.! - 인터페이스만 맞춰준다.
+    (업캐스팅 구조)
+======================================================
+자바 - DB 연결 : Driver필요
+
+용어정리
+--------
+응집도가 높게 특정한 역할만 수행하는 클래스 
+
+* db처리 전담 클래스 - DAO(Data Access Object)
+
+* data전달 전담 클래스 -  DTO(Data Transfer Object), VO(Value Object)
+
+* CRUD(Creat,  Read , Update,  Delete) - 데이터를 가지고 할 수 있는 조작
+            insert  select   update  delete
+
+* SQL - 
+   Data Definition Language(DDL) - db, table, 항목, 타입, 제약조건 
+   정의 (create, alter, drop)
+   Data Manipulation Language(DML) - CRUD
+   Data Control Language(DCL) - 계정생성
+=========================================================================
+src/main/resources -  context, myBatis(mapper,config)
+resources - js,css,img,html
+
+시작시 초기 설정
+1. 시스템라이브러리 설정 (Alt+Enter -> Project Facet) ->2. pom.xml 설정 -> 3. web.xml설정
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
